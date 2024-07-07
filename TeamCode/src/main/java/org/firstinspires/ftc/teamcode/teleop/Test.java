@@ -18,8 +18,8 @@ import org.firstinspires.ftc.teamcode.core.Bot;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 import org.firstinspires.ftc.teamcode.library.DriverOrientedControl;
 
-@TeleOp(name = "ServoTest")
-public class ServoTest extends LinearOpMode {
+@TeleOp(name = "Test")
+public class Test extends LinearOpMode {
 
     DriverOrientedControl drive;
     public double power = 0.8;
