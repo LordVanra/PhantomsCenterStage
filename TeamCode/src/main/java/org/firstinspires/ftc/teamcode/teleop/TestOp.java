@@ -8,36 +8,27 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
-import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.core.Bot;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 import org.firstinspires.ftc.teamcode.library.DriverOrientedControl;
 
 @TeleOp(name = "Test")
-public class Test extends LinearOpMode {
+public class TestOp extends LinearOpMode {
 
     DriverOrientedControl drive;
     public double power = 0.8;
     public double turningMultiplier = 0.8;
-    private boolean lastA = false;
     //This bad boy
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
-
-    Servo claw;
 
     @Override
     public void runOpMode() throws InterruptedException {
         Bot.init(hardwareMap, true);
-
-//        claw=hardwareMap.get(Servo.class, "claw");
         GamepadEx driverOp = new GamepadEx(gamepad1);// driver
         waitForStart();
-//        claw.setPosition(0);
         MecanumDrive drive = new MecanumDrive(
                 Bot.frontLeft,
                 Bot.frontRight,
@@ -46,28 +37,6 @@ public class Test extends LinearOpMode {
         );
 
         while (opModeIsActive()) {
-
-//            if (gamepad1.a){
-//                claw.setPosition(1);
-//            }
-//            if (gamepad1.b){
-//                claw.setPosition(0);
-//            }
-            if(gamepad1.a && !lastA){
-//                claw.setPosition(0);
-                lastA = true;
-            }
-            else if(gamepad1.a && !lastA){
-//                claw.setPosition(1);
-                lastA = true;
-            }
-            else if(gamepad1.a){
-                lastA = true;
-            }
-            else{
-                lastA = false;
-            }
-            telemetry.addData("Last A?", lastA);
 
             //DRIVETRAIN STUFF
             if (type == DriveStyle.DriveType.MECANUMARCADE) {
