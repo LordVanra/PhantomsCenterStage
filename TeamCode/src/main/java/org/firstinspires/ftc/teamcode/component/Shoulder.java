@@ -8,8 +8,7 @@ public class Shoulder {
     private DcMotor shoulderMotor1;
     private DcMotor shoulderMotor2;
 
-
-    private double targetPos;
+    public int mult = 1;
 
     public void init(HardwareMap hwMap){
 
@@ -28,8 +27,8 @@ public class Shoulder {
     }
 
     public void stop(){
-        shoulderMotor1.setPower(0.01);
-        shoulderMotor2.setPower(0.01);
+        shoulderMotor1.setPower(0.02*mult);
+        shoulderMotor2.setPower(0.02*mult);
     }
 
 }

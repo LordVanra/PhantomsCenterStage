@@ -95,6 +95,11 @@ public class TestOp extends LinearOpMode {
                 Bot.claw.stop();
             }
 
+            if(gamepad1.b){
+                Bot.shoulder.mult *= -1;
+            }
+
+                telemetry.addData("Mult", Bot.shoulder.mult);
             telemetry.update();
         }
     }
