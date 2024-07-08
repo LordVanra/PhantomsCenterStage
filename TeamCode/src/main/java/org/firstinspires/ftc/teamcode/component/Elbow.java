@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.component;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Elbow {
 
-    private Servo elbowServo1;
-    private Servo elbowServo2;
+    private CRServo elbowServo1;
+    private CRServo elbowServo2;
 
 //    public enum Pos{
 //        //Update Values
@@ -26,24 +27,26 @@ public class Elbow {
 //        }
 //    }
 
-    private int targetPos;
+    private double targetPos;
 
     public void init(HardwareMap hwMap){
 
-        elbowServo1 = hwMap.get(Servo.class, "eServo1");
-        elbowServo2 = hwMap.get(Servo.class, "eServo2");
+        elbowServo1 = hwMap.get(CRServo.class, "eServo1");
+        elbowServo2 = hwMap.get(CRServo.class, "eServo2");
     }
 
-    public void setTargetPosition(int position){
-        targetPos = position;
+    public void forward(float power){
+        elbowServo1.setPower(3.5*power/5);
+        elbowServo2.setPower(3.5*power/5);
     }
 
-    public double getTargetPosition(){
-        return targetPos;
+    public void reverse(float power){
+        elbowServo1.setPower(-1.5*power/5);
+        elbowServo2.setPower(-1.5*power/5);
     }
 
-    public void update(){
-        elbowServo1.setPosition(targetPos);
-        elbowServo2.setPosition(targetPos);
+    public void stop(){
+        elbowServo1.setPower(0.1);
+        elbowServo2.setPower(0.1);
     }
 }

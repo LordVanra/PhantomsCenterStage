@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode.core;
 
-import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
+import org.firstinspires.ftc.teamcode.component.Shoulder;
 import org.firstinspires.ftc.teamcode.component.Claw;
 import org.firstinspires.ftc.teamcode.component.Elbow;
 import org.firstinspires.ftc.teamcode.component.Wrist;
@@ -11,7 +10,6 @@ import org.firstinspires.ftc.teamcode.component.Wrist;
 
 public class Bot {
     public static HardwareMap hardwareMap;
-    public static RevIMU imu;
 
     public static Motor frontLeft;
     public static Motor frontRight;
@@ -21,13 +19,12 @@ public class Bot {
     public static Wrist wrist;
     public static Elbow elbow;
     public static Claw claw;
+    public static Shoulder shoulder;
 //    public static imu imu;
 
     public static void init(HardwareMap hwMap, boolean initTeleOp) {
 
         hardwareMap = hwMap;
-        imu = new RevIMU(hwMap);
-        imu.init();
 
         wrist = new Wrist();
         wrist.init(hardwareMap);
@@ -38,13 +35,16 @@ public class Bot {
         elbow = new Elbow();
         elbow.init(hardwareMap);
 
+        shoulder = new Shoulder();
+        shoulder.init(hardwareMap);
+
         frontLeft = new Motor(hwMap, "leftFront");
         frontRight = new Motor(hwMap, "rightFront");
         backLeft = new Motor(hwMap, "leftBack");
         backRight = new Motor(hwMap, "rightBack");
 
         frontLeft.setInverted(true);
-        frontRight.setInverted(false);
+        frontRight.setInverted(true);
         backLeft.setInverted(true);
         backRight.setInverted(true);
 

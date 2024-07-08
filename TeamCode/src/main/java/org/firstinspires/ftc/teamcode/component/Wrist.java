@@ -1,28 +1,27 @@
 package org.firstinspires.ftc.teamcode.component;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
 
-    private Servo wrist;
-    private int pos;
-    //Set Values
+    private CRServo wristServo;
 
     public void init(HardwareMap hwmap){
-        wrist = hwmap.get(Servo.class, "wrist");
+        wristServo = hwmap.get(CRServo.class, "wrist");
     }
 
-    public void setPos(){
-        wrist.setPosition(pos);
+    public void forward(){
+        wristServo.setPower(0.4);
     }
 
-    public int getPos(){
-        return pos;
+    public void reverse(){
+        wristServo.setPower(-0.4);
     }
 
-    public void update(){
-        wrist.setPosition(pos);
+    public void stop(){
+        wristServo.setPower(0);
     }
 
 }
