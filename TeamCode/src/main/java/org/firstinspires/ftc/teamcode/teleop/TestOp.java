@@ -1,13 +1,9 @@
-/** This is the code used for the field-centric driving tutorial
- This is by no means a perfect code
- There are a number of improvements that can be made
- So, feel free to add onto this and make it better
- */
-
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.arcrobotics.ftclib.gamepad.ToggleButtonReader;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.core.Bot;
@@ -20,6 +16,8 @@ public class TestOp extends LinearOpMode {
     DriverOrientedControl drive;
     public double power = 0.8;
     public double turningMultiplier = 0.8;
+
+    public boolean lastB = false;
     //This bad boy
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
 
@@ -27,6 +25,11 @@ public class TestOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Bot.init(hardwareMap, true);
         GamepadEx driverOp = new GamepadEx(gamepad1);// driver
+
+        ToggleButtonReader bReader = new ToggleButtonReader(
+                driverOp, GamepadKeys.Button.B
+        );
+
         waitForStart();
         MecanumDrive drive = new MecanumDrive(
                 Bot.frontLeft,
@@ -65,21 +68,21 @@ public class TestOp extends LinearOpMode {
                 Bot.wrist.stop();
             }
 
-            if(gamepad1.left_bumper){
+            if(gamepad1.left_trigger>0){
                 Bot.shoulder.reverse();
             }
-            else if(gamepad1.right_bumper){
+            else if(gamepad1.right_trigger>0){
                 Bot.shoulder.forward();
             }
             else{
                 Bot.shoulder.stop();
             }
 
-            if(gamepad1.left_trigger>0){
-                Bot.elbow.forward(gamepad1.left_trigger);
+            if(gamepad1.left_bumper){
+                Bot.elbow.forward();
             }
-            else if(gamepad1.right_trigger>0){
-                Bot.elbow.reverse(gamepad1.right_trigger);
+            else if(gamepad1.right_bumper){
+                Bot.elbow.reverse();
             }
             else{
                 Bot.elbow.stop();
@@ -95,11 +98,15 @@ public class TestOp extends LinearOpMode {
                 Bot.claw.stop();
             }
 
-            if(gamepad1.b){
+            if(gamepad1.b && !lastB){ //bReader.getState()
                 Bot.shoulder.mult *= -1;
+                lastB = true;
+            }
+            else if (!gamepad1.b){
+                lastB = false;
             }
 
-                telemetry.addData("Mult", Bot.shoulder.mult);
+            telemetry.addData("Mult", Bot.shoulder.mult);
             telemetry.update();
         }
     }

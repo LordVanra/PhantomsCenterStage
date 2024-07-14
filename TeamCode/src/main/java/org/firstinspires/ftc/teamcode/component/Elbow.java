@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Elbow {
 
-    private CRServo elbowServo1;
-    private CRServo elbowServo2;
+    private Servo elbowServo1;
+    private Servo elbowServo2;
 
 //    public enum Pos{
 //        //Update Values
@@ -31,22 +31,27 @@ public class Elbow {
 
     public void init(HardwareMap hwMap){
 
-        elbowServo1 = hwMap.get(CRServo.class, "eServo1");
-        elbowServo2 = hwMap.get(CRServo.class, "eServo2");
+        elbowServo1 = hwMap.get(Servo.class, "eServo1");
+        elbowServo2 = hwMap.get(Servo.class, "eServo2");
     }
 
-    public void forward(float power){
-        elbowServo1.setPower(3.5*power/5);
-        elbowServo2.setPower(3.5*power/5);
+    public void forward(){
+        elbowServo1.setPosition(elbowServo1.getPosition()-0.001);
+        elbowServo2.setPosition(elbowServo1.getPosition()+0.001);
     }
 
-    public void reverse(float power){
-        elbowServo1.setPower(-1.5*power/5);
-        elbowServo2.setPower(-1.5*power/5);
+    public void reverse(){
+        elbowServo1.setPosition(elbowServo1.getPosition()+0.001);
+        elbowServo2.setPosition(elbowServo1.getPosition()-0.001);
     }
 
     public void stop(){
-        elbowServo1.setPower(0.1);
-        elbowServo2.setPower(0.1);
+        elbowServo1.setPosition(elbowServo1.getPosition());
+        elbowServo2.setPosition(elbowServo1.getPosition());
+    }
+
+    public double[] getPos(){
+        double[] posArr = {elbowServo1.getPosition(), elbowServo2.getPosition()};
+        return new double[] {elbowServo1.getPosition(), elbowServo2.getPosition()};
     }
 }

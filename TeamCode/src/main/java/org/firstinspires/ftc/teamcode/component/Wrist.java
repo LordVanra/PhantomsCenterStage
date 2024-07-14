@@ -6,22 +6,22 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wrist {
 
-    private CRServo wristServo;
+    private Servo wristServo;
 
     public void init(HardwareMap hwmap){
-        wristServo = hwmap.get(CRServo.class, "wrist");
+        wristServo = hwmap.get(Servo.class, "wrist");
     }
 
     public void forward(){
-        wristServo.setPower(0.4);
+        wristServo.setPosition(wristServo.getPosition()+0.001);
     }
 
     public void reverse(){
-        wristServo.setPower(-0.4);
+        wristServo.setPosition(wristServo.getPosition()-0.001);
     }
 
     public void stop(){
-        wristServo.setPower(0);
+        wristServo.setPosition(wristServo.getPosition());
     }
 
 }
