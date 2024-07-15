@@ -8,7 +8,7 @@ public class Wrist {
 
     private Servo wristServo;
 
-    private double targetPos = 0.65;
+    private double targetPos = 0.5;
 
     public void init(HardwareMap hwmap){
         wristServo = hwmap.get(Servo.class, "wrist");
