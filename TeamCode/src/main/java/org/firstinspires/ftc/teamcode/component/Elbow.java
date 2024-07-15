@@ -9,8 +9,8 @@ public class Elbow {
     private Servo elbowServo1;
     private Servo elbowServo2;
 
-    private double targetPos1 = 0.5;
-    private double targetPos2 = 0.5;
+    private double targetPos1 = 0.8;
+    private double targetPos2 = 0.2;
 
 //    public enum Pos{
 //        //Update Values

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.component.Elbow;
 import org.firstinspires.ftc.teamcode.component.Wrist;
 
 
-public class Bot {
+public class SigmaPiZeta {
     public static HardwareMap hardwareMap;
 
     public static Motor frontLeft;

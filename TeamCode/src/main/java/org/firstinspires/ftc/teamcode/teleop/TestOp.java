@@ -6,7 +6,7 @@ import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.gamepad.ToggleButtonReader;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.core.Bot;
+import org.firstinspires.ftc.teamcode.core.SigmaPiZeta;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 import org.firstinspires.ftc.teamcode.library.DriverOrientedControl;
 
@@ -22,7 +22,7 @@ public class TestOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Bot.init(hardwareMap, true);
+        SigmaPiZeta.init(hardwareMap, true);
         GamepadEx driverOp = new GamepadEx(gamepad1);// driver
 
         ToggleButtonReader bReader = new ToggleButtonReader(
@@ -31,10 +31,10 @@ public class TestOp extends LinearOpMode {
 
         waitForStart();
         MecanumDrive drive = new MecanumDrive(
-                Bot.frontLeft,
-                Bot.frontRight,
-                Bot.backLeft,
-                Bot.backRight
+                SigmaPiZeta.frontLeft,
+                SigmaPiZeta.frontRight,
+                SigmaPiZeta.backLeft,
+                SigmaPiZeta.backRight
         );
 
         while (opModeIsActive()) {
@@ -53,57 +53,57 @@ public class TestOp extends LinearOpMode {
 //                        power * (Math.pow(driverOp.getLeftX(), 3)),
 //                        power * (Math.pow(driverOp.getLeftY(), 3)),
 //                        turningMultiplier * power * (Math.pow(driverOp.getRightX(), 3)),
-//                        Bot.imu.getRotation2d().getDegrees(),   // gyro value passed in here must be in degrees
+//                        SigmaPiZeta.imu.getRotation2d().getDegrees(),   // gyro value passed in here must be in degrees
 //                        false
 //                );
 //            }
             if(gamepad1.dpad_left){
-                Bot.wrist.forward();
+                SigmaPiZeta.wrist.forward();
             }
             else if(gamepad1.dpad_right){
-                Bot.wrist.reverse();
+                SigmaPiZeta.wrist.reverse();
             }
 
             if(gamepad1.left_trigger>0){
-                Bot.shoulder.reverse();
+                SigmaPiZeta.shoulder.reverse();
             }
             else if(gamepad1.right_trigger>0){
-                Bot.shoulder.forward();
+                SigmaPiZeta.shoulder.forward();
             }
             else{
-                Bot.shoulder.stop();
+                SigmaPiZeta.shoulder.stop();
             }
 
             if(gamepad1.left_bumper){
-                Bot.elbow.forward();
+                SigmaPiZeta.elbow.forward();
             }
             else if(gamepad1.right_bumper){
-                Bot.elbow.reverse();
+                SigmaPiZeta.elbow.reverse();
             }
 
             if(gamepad1.x){
-                Bot.claw.forward();
+                SigmaPiZeta.claw.forward();
             }
             else if(gamepad1.a){
-                Bot.claw.reverse();
+                SigmaPiZeta.claw.reverse();
             }
             else{
-                Bot.claw.stop();
+                SigmaPiZeta.claw.stop();
             }
 
             if(bReader.getState()){ //test
-                Bot.shoulder.mult *= -1;
+                SigmaPiZeta.shoulder.mult *= -1;
             }
 
             bReader.readValue();
 
-            Bot.elbow.update();
-            Bot.wrist.update();
+            SigmaPiZeta.elbow.update();
+            SigmaPiZeta.wrist.update();
 
-            telemetry.addData("Target Pos E1", Bot.elbow.getPos()[0]);
-            telemetry.addData("Target Pos E2", Bot.elbow.getPos()[1]);
-            telemetry.addData("Target Pos E1", Bot.wrist.getPos());
-            telemetry.addData("Mult", Bot.shoulder.mult);
+            telemetry.addData("Target Pos E1", SigmaPiZeta.elbow.getPos()[0]);
+            telemetry.addData("Target Pos E2", SigmaPiZeta.elbow.getPos()[1]);
+            telemetry.addData("Target Pos E1", SigmaPiZeta.wrist.getPos());
+            telemetry.addData("Mult", SigmaPiZeta.shoulder.mult);
             telemetry.update();
         }
     }

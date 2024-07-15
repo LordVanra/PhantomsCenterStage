@@ -1,9 +1,3 @@
-/** This is the code used for the field-centric driving tutorial
- This is by no means a perfect code
- There are a number of improvements that can be made
- So, feel free to add onto this and make it better
- */
-
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
@@ -13,10 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.teamcode.core.Bot;
-import org.firstinspires.ftc.teamcode.library.DriveStyle;
-import org.firstinspires.ftc.teamcode.library.DriverOrientedControl;
 
 @TeleOp(name = "ZeroServoSetter")
 public class ZeroOp extends LinearOpMode {
