@@ -17,7 +17,6 @@ public class TestOp extends LinearOpMode {
     public double power = 0.8;
     public double turningMultiplier = 0.8;
 
-    public boolean lastB = false;
     //This bad boy
     DriveStyle.DriveType type = DriveStyle.DriveType.MECANUMARCADE;
 
@@ -64,9 +63,6 @@ public class TestOp extends LinearOpMode {
             else if(gamepad1.dpad_right){
                 Bot.wrist.reverse();
             }
-            else{
-                Bot.wrist.stop();
-            }
 
             if(gamepad1.left_trigger>0){
                 Bot.shoulder.reverse();
@@ -84,9 +80,6 @@ public class TestOp extends LinearOpMode {
             else if(gamepad1.right_bumper){
                 Bot.elbow.reverse();
             }
-            else{
-                Bot.elbow.stop();
-            }
 
             if(gamepad1.x){
                 Bot.claw.forward();
@@ -98,14 +91,18 @@ public class TestOp extends LinearOpMode {
                 Bot.claw.stop();
             }
 
-            if(gamepad1.b && !lastB){ //bReader.getState()
+            if(bReader.getState()){ //test
                 Bot.shoulder.mult *= -1;
-                lastB = true;
-            }
-            else if (!gamepad1.b){
-                lastB = false;
             }
 
+            bReader.readValue();
+
+            Bot.elbow.update();
+            Bot.wrist.update();
+
+            telemetry.addData("Target Pos E1", Bot.elbow.getPos()[0]);
+            telemetry.addData("Target Pos E2", Bot.elbow.getPos()[1]);
+            telemetry.addData("Target Pos E1", Bot.wrist.getPos());
             telemetry.addData("Mult", Bot.shoulder.mult);
             telemetry.update();
         }

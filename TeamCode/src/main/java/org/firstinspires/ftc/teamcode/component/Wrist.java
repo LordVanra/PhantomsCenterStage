@@ -8,20 +8,25 @@ public class Wrist {
 
     private Servo wristServo;
 
+    private double targetPos = 0.65;
+
     public void init(HardwareMap hwmap){
         wristServo = hwmap.get(Servo.class, "wrist");
     }
 
     public void forward(){
-        wristServo.setPosition(wristServo.getPosition()+0.001);
+        targetPos += 0.001;
     }
 
     public void reverse(){
-        wristServo.setPosition(wristServo.getPosition()-0.001);
+        targetPos -= 0.001;
     }
 
-    public void stop(){
-        wristServo.setPosition(wristServo.getPosition());
+    public double getPos(){
+        return targetPos;
     }
 
+    public void update(){
+        wristServo.setPosition(targetPos);
+    }
 }

@@ -9,6 +9,9 @@ public class Elbow {
     private Servo elbowServo1;
     private Servo elbowServo2;
 
+    private double targetPos1 = 0.5;
+    private double targetPos2 = 0.5;
+
 //    public enum Pos{
 //        //Update Values
 //        OUT(10),
@@ -27,31 +30,27 @@ public class Elbow {
 //        }
 //    }
 
-    private double targetPos;
-
     public void init(HardwareMap hwMap){
-
         elbowServo1 = hwMap.get(Servo.class, "eServo1");
         elbowServo2 = hwMap.get(Servo.class, "eServo2");
     }
 
     public void forward(){
-        elbowServo1.setPosition(elbowServo1.getPosition()-0.001);
-        elbowServo2.setPosition(elbowServo1.getPosition()+0.001);
+        targetPos1 -= 0.001;
+        targetPos2 += 0.001;
     }
 
     public void reverse(){
-        elbowServo1.setPosition(elbowServo1.getPosition()+0.001);
-        elbowServo2.setPosition(elbowServo1.getPosition()-0.001);
+        targetPos1 += 0.001;
+        targetPos2 -= 0.001;
     }
 
-    public void stop(){
-        elbowServo1.setPosition(elbowServo1.getPosition());
-        elbowServo2.setPosition(elbowServo1.getPosition());
+    public void update(){
+        elbowServo1.setPosition(targetPos1);
+        elbowServo2.setPosition(targetPos2);
     }
 
     public double[] getPos(){
-        double[] posArr = {elbowServo1.getPosition(), elbowServo2.getPosition()};
-        return new double[] {elbowServo1.getPosition(), elbowServo2.getPosition()};
+        return new double[] {targetPos1, targetPos2};
     }
 }

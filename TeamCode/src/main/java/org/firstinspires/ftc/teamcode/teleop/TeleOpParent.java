@@ -62,9 +62,6 @@ public class TeleOpParent extends LinearOpMode {
             else if(gamepad1.dpad_right){
                 Bot.wrist.reverse();
             }
-            else{
-                Bot.wrist.stop();
-            }
 
             if(gamepad1.left_bumper){
                 Bot.shoulder.reverse();
@@ -81,9 +78,6 @@ public class TeleOpParent extends LinearOpMode {
             }
             else if(gamepad1.right_trigger>0){
                 Bot.elbow.reverse();
-            }
-            else{
-                Bot.elbow.stop();
             }
 
             if(gamepad1.x){
