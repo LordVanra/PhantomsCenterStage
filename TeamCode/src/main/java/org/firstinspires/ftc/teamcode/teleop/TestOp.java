@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.core.SigmaPiZeta;
 import org.firstinspires.ftc.teamcode.library.DriveStyle;
 import org.firstinspires.ftc.teamcode.library.DriverOrientedControl;
 
-@TeleOp(name = "Test")
+@TeleOp(name = "TestOp")
 public class TestOp extends LinearOpMode {
 
     DriverOrientedControl drive;
